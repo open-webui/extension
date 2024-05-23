@@ -99,7 +99,6 @@
         (e.shiftKey || e.altKey)
       ) {
         e.preventDefault();
-
         try {
           const response = await chrome.runtime.sendMessage({
             action: "getSelection",
@@ -113,6 +112,8 @@
         }
 
         show = !show;
+
+        console.log("toggle", show, searchValue);
 
         setTimeout(() => {
           const inputElement = document.getElementById(
@@ -215,11 +216,11 @@
   });
 </script>
 
+<!-- svelte-ignore a11y-click-events-have-key-events -->
+<!-- svelte-ignore a11y-no-static-element-interactions -->
 {#if show}
-  <!-- svelte-ignore a11y-click-events-have-key-events -->
-  <!-- svelte-ignore a11y-no-static-element-interactions -->
   <div
-    class="tlwd-fixed tlwd-top-0 tlwd-right-0 tlwd-left-0 tlwd-bottom-0 tlwd-w-full tlwd-min-h-screen tlwd-h-screen tlwd-flex tlwd-justify-center tlwd-z-[9999999999] tlwd-overflow-hidden tlwd-overscroll-contain"
+    class="tlwd-fixed tlwd-top-0 tlwd-right-0 tlwd-left-0 tlwd-bottom-0 tlwd-w-full tlwd-min-h-screen tlwd-h-screen tlwd-flex tlwd-justify-center tlwd-z-[9999999999] tlwd-overflow-hidden tlwd-overscroll-contain tlwd-pointer-events-none"
     on:mousedown={() => {
       show = false;
     }}
