@@ -15,7 +15,13 @@ export const SpotlightSearch = () => {
         e.preventDefault();
         setOpen((open) => !open);
         setTimeout(() => {
-          document.getElementById("open-webui-search-input").focus();
+          const inputElement = document.getElementById(
+            "open-webui-search-input"
+          );
+
+          if (inputElement) {
+            inputElement.focus();
+          }
         }, 0);
       }
 
