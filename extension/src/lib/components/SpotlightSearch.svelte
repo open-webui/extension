@@ -414,14 +414,16 @@
               />
             </div>
 
-            <div class=" tlwd-flex tlwd-justify-end tlwd-gap-1">
-              <p
-                class="tlwd-text-right tlwd-text-[0.7rem] tlwd-p-0 tlwd-m-0 tlwd-text-neutral-300"
+            <div
+              class=" tlwd-flex tlwd-justify-end tlwd-gap-1 tlwd-items-center"
+            >
+              <div
+                class="tlwd-text-right tlwd-text-[0.7rem] tlwd-p-0 tlwd-m-0 tlwd-text-neutral-300 tlwd-h-fit"
               >
                 Press ⌘Space+Shift to toggle
-              </p>
+              </div>
               <button
-                class=" tlwd-flex tlwd-items-center tlwd-bg-transparent tlwd-text-neutral-100 tlwd-cursor-pointer tlwd-p-0 tlwd-m-0 tlwd-outline-none tlwd-border-none"
+                class=" tlwd-h-fit tlwd-flex tlwd-items-center tlwd-bg-transparent tlwd-text-neutral-100 tlwd-cursor-pointer tlwd-p-0 tlwd-m-0 tlwd-outline-none tlwd-border-none"
                 type="button"
                 on:click={() => {
                   showConfig = true;
