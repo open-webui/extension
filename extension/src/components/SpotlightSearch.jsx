@@ -286,7 +286,7 @@ export const SpotlightSearch = () => {
                   </button>
                 </div>
 
-                {models && (
+                {models && models.length > 0 && (
                   <div className="tlwd-flex tlwd-items-center tlwd-gap-2 tlwd-w-full tlwd-mt-2">
                     <div className=" tlwd-flex tlwd-items-center">
                       <svg
