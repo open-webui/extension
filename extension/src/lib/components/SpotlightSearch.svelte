@@ -210,7 +210,7 @@
       }
     };
 
-    document.addEventListener("keydown", down);
+    document.addEventListener("keydown", down, { capture: true });
     return () => document.removeEventListener("keydown", down);
   });
 </script>
