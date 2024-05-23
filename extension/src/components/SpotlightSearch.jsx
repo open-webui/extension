@@ -16,7 +16,7 @@ export const SpotlightSearch = () => {
         setOpen((open) => !open);
 
         const response = await chrome.runtime.sendMessage({
-          method: "getSelection",
+          action: "getSelection",
         });
 
         if (response?.data ?? false) {
@@ -39,7 +39,7 @@ export const SpotlightSearch = () => {
       }
     };
 
-    document.addEventListener("keydown", down);
+    document.addEventListener("keydown", down, { capture: true });
     return () => document.removeEventListener("keydown", down);
   }, []);
 

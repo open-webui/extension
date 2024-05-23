@@ -1,7 +1,7 @@
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   console.log(request, sender);
   const id = sender.tab.id;
-  if (request.method == "getSelection") {
+  if (request.action == "getSelection") {
     chrome.scripting
       .executeScript({
         target: { tabId: id, allFrames: true },
