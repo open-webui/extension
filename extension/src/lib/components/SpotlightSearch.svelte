@@ -113,7 +113,7 @@
 
         show = !show;
 
-        console.log("toggle", show, searchValue);
+        // console.log("toggle", show, searchValue);
 
         setTimeout(() => {
           const inputElement = document.getElementById(
