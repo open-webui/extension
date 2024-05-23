@@ -37,22 +37,22 @@ export const SpotlightSearch = () => {
   };
 
   return open ? (
-    <div className="fixed top-0 right-0 left-0 bottom-0 w-full min-h-screen h-screen flex justify-center z-[9999999999] overflow-hidden overscroll-contain">
-      <div className=" m-auto max-w-xl w-full pb-32">
-        <div className="w-full flex flex-col justify-between py-2.5 px-3.5 rounded-2xl outline outline-1 outline-gray-900 backdrop-blur-3xl bg-gray-850/70 shadow-4xl modal-animation">
+    <div className="tlwd-fixed tlwd-top-0 tlwd-right-0 tlwd-left-0 tlwd-bottom-0 tlwd-w-full tlwd-min-h-screen tlwd-h-screen tlwd-flex tlwd-justify-center tlwd-z-[9999999999] tlwd-overflow-hidden tlwd-overscroll-contain">
+      <div className=" tlwd-m-auto tlwd-max-w-xl tlwd-w-full tlwd-pb-32">
+        <div className="tlwd-w-full tlwd-flex tlwd-flex-col tlwd-justify-between tlwd-py-2.5 tlwd-px-3.5 tlwd-rounded-2xl tlwd-outline tlwd-outline-1 tlwd-outline-gray-850 tlwd-backdrop-blur-3xl tlwd-bg-gray-850/70 shadow-4xl modal-animation">
           <form
-            className="text-gray-200 w-full p-0 m-0"
+            className="tlwd-text-gray-200 tlwd-w-full tlwd-p-0 tlwd-m-0"
             onSubmit={submitHandler}
           >
-            <div className="flex items-center gap-2 w-full">
-              <div>
+            <div className="tlwd-flex tlwd-items-center tlwd-gap-2 tlwd-w-full">
+              <div className=" tlwd-flex tlwd-items-center">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
                   strokeWidth={2.5}
                   stroke="currentColor"
-                  className="size-5"
+                  className="tlwd-size-5"
                 >
                   <path
                     strokeLinecap="round"
@@ -64,14 +64,14 @@ export const SpotlightSearch = () => {
               <input
                 id="open-webui-search-input"
                 placeholder="Search Open WebUI"
-                className="text-xl w-full font-medium bg-transparent border-none placeholder:text-gray-500 text-neutral-100 outline-none"
+                className="tlwd-p-0 tlwd-m-0 tlwd-text-xl tlwd-w-full tlwd-font-medium tlwd-bg-transparent tlwd-border-none placeholder:tlwd-text-gray-500 tlwd-text-neutral-100 tlwd-outline-none"
                 value={searchValue}
                 onChange={(e) => setSearchValue(e.target.value)}
                 autoComplete="off"
               />
             </div>
 
-            <p className="text-right text-[0.7rem] text-neutral-300">
+            <p className="tlwd-text-right tlwd-text-[0.7rem] tlwd-p-0 tlwd-m-0 tlwd-text-neutral-300">
               Press ⌘Space+Shift to toggle
             </p>
           </form>

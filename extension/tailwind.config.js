@@ -22,4 +22,9 @@ export default {
     },
   },
   plugins: [],
+  important: "#extension-app",
+  prefix: "tlwd-",
+  corePlugins: {
+    preflight: false,
+  },
 };

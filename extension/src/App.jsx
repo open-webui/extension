@@ -2,7 +2,9 @@ import { SpotlightSearch } from "./components/SpotlightSearch";
 function App() {
   return (
     <>
-      <SpotlightSearch />
+      <div className="extension-container">
+        <SpotlightSearch />
+      </div>
     </>
   );
 }
