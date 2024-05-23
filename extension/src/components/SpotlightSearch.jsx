@@ -8,6 +8,13 @@ export const SpotlightSearch = () => {
 
   const [storageCache, setStorageCache] = useState(null);
 
+  const [url, setUrl] = useState("");
+  const [key, setKey] = useState("");
+  const [model, setModel] = useState("");
+
+  const [showConfig, setShowConfig] = useState(true);
+  const [models, setModels] = useState(null);
+
   useEffect(() => {
     async function getStorageCache() {
       let _storageCache = null;
@@ -19,16 +26,19 @@ export const SpotlightSearch = () => {
       }
 
       setStorageCache(_storageCache);
+
+      if (_storageCache) {
+        setUrl(_storageCache.url ?? "");
+        setKey(_storageCache.key ?? "");
+        setModel(_storageCache.model ?? "");
+        if (_storageCache.url && _storageCache.key && _storageCache.model) {
+          setModels(await getModels(_storageCache.key, _storageCache.url));
+          setShowConfig(false);
+        }
+      }
     }
     getStorageCache();
   }, []);
-
-  const [url, setUrl] = useState(storageCache?.url ?? "");
-  const [key, setKey] = useState(storageCache?.key ?? "");
-  const [model, setModel] = useState(storageCache?.model ?? "");
-
-  const [showConfig, setShowConfig] = useState(url === "" || key === "");
-  const [models, setModels] = useState(null);
 
   const resetConfig = () => {
     console.log("resetConfig");
