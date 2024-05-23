@@ -1,0 +1,36 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html,
+  pre {
+    font-family: -apple-system, ui-sans-serif, system-ui, "Segoe UI", Roboto,
+      Ubuntu, Cantarell, "Noto Sans", sans-serif, "Helvetica Neue", Arial,
+      "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+      "Noto Color Emoji";
+  }
+}
+
+.shadow-3xl {
+  box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.35);
+}
+
+.shadow-4xl {
+  box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.7);
+}
+
+.modal-animation {
+  animation: scaleUp 150ms cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+@keyframes scaleUp {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
