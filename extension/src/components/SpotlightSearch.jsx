@@ -6,7 +6,7 @@ export const SpotlightSearch = () => {
 
   // Toggle the menu when ⌘Space+Shift is pressed
   useEffect(() => {
-    const down = (e) => {
+    const down = async (e) => {
       if (
         e.key === " " &&
         (e.metaKey || e.ctrlKey) &&
@@ -14,6 +14,15 @@ export const SpotlightSearch = () => {
       ) {
         e.preventDefault();
         setOpen((open) => !open);
+
+        const response = await chrome.runtime.sendMessage({
+          method: "getSelection",
+        });
+
+        if (response?.data ?? false) {
+          setSearchValue(response.data);
+        }
+
         setTimeout(() => {
           const inputElement = document.getElementById(
             "open-webui-search-input"
@@ -40,6 +49,8 @@ export const SpotlightSearch = () => {
     setSearchValue("");
 
     window.open(`http://localhost:8080/?q=${searchValue}`, "_blank");
+
+    setOpen(false);
   };
 
   return open ? (

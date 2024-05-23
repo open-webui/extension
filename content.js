@@ -23,4 +23,4 @@ function injectCSS(file) {
 
 // Inject the CSS and JS files
 injectCSS(chrome.runtime.getURL("extension/dist/style.css"));
-injectScript(chrome.runtime.getURL("extension/dist/main.js"), "body");
+// injectScript(chrome.runtime.getURL("extension/dist/main.js"), "body");

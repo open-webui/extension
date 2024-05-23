@@ -18,7 +18,8 @@
         "<all_urls>"
       ],
       "js": [
-        "content.js"
+        "content.js",
+        "extension/dist/main.js"
       ]
     }
   ],
@@ -36,6 +37,7 @@
     }
   ],
   "permissions": [
-    "storage"
+    "storage",
+    "scripting"
   ]
 }
