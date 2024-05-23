@@ -6,18 +6,44 @@ export const SpotlightSearch = () => {
   const [open, setOpen] = useState(false);
   const [searchValue, setSearchValue] = useState("");
 
-  const [url, setUrl] = useState(localStorage.getItem("url") ?? "");
-  const [key, setKey] = useState(localStorage.getItem("key") ?? "");
-  const [model, setModel] = useState(localStorage.getItem("model") ?? "");
+  const [storageCache, setStorageCache] = useState(null);
+
+  useEffect(() => {
+    async function getStorageCache() {
+      let _storageCache = null;
+
+      try {
+        _storageCache = await chrome.storage.local.get();
+      } catch (error) {
+        console.log(error);
+      }
+
+      setStorageCache(_storageCache);
+    }
+    getStorageCache();
+  }, []);
+
+  const [url, setUrl] = useState(storageCache?.url ?? "");
+  const [key, setKey] = useState(storageCache?.key ?? "");
+  const [model, setModel] = useState(storageCache?.model ?? "");
 
   const [showConfig, setShowConfig] = useState(url === "" || key === "");
   const [models, setModels] = useState(null);
 
   const resetConfig = () => {
     console.log("resetConfig");
-    localStorage.setItem("url", "");
-    localStorage.setItem("key", "");
-    localStorage.setItem("model", "");
+
+    try {
+      chrome.storage.local.clear().then(() => {
+        console.log("Value is cleared");
+      });
+    } catch (error) {
+      console.log(error);
+
+      localStorage.setItem("url", "");
+      localStorage.setItem("key", "");
+      localStorage.setItem("model", "");
+    }
 
     setUrl("");
     setKey("");
@@ -171,11 +197,19 @@ export const SpotlightSearch = () => {
   const initHandler = (e) => {
     e.preventDefault();
 
-    localStorage.setItem("url", url);
-    localStorage.setItem("key", key);
-    localStorage.setItem("model", model);
+    try {
+      chrome.storage.local
+        .set({ url: url, key: key, model: model })
+        .then(() => {
+          console.log("Value is set");
+        });
+    } catch (error) {
+      console.log(error);
 
-    console.log(localStorage);
+      localStorage.setItem("url", url);
+      localStorage.setItem("key", key);
+      localStorage.setItem("model", model);
+    }
 
     setShowConfig(false);
   };
@@ -224,7 +258,7 @@ export const SpotlightSearch = () => {
                     onChange={(e) => {
                       setUrl(e.target.value);
                     }}
-                    autoComplete="off"
+                    autoComplete="one-time-code"
                     required
                   />
                 </div>
@@ -246,13 +280,11 @@ export const SpotlightSearch = () => {
                     </svg>
                   </div>
                   <input
-                    id="open-webui-key-input"
                     placeholder="Open WebUI API Key"
-                    type="password"
                     className="tlwd-p-0 tlwd-m-0 tlwd-text-xl tlwd-w-full tlwd-font-medium tlwd-bg-transparent tlwd-border-none placeholder:tlwd-text-gray-500 tlwd-text-neutral-100 tlwd-outline-none"
                     value={key}
                     onChange={(e) => setKey(e.target.value)}
-                    autoComplete="off"
+                    autoComplete="one-time-code"
                     required
                   />
                   <button
@@ -378,7 +410,7 @@ export const SpotlightSearch = () => {
                   className="tlwd-p-0 tlwd-m-0 tlwd-text-xl tlwd-w-full tlwd-font-medium tlwd-bg-transparent tlwd-border-none placeholder:tlwd-text-gray-500 tlwd-text-neutral-100 tlwd-outline-none"
                   value={searchValue}
                   onChange={(e) => setSearchValue(e.target.value)}
-                  autoComplete="off"
+                  autoComplete="one-time-code"
                 />
               </div>
 
