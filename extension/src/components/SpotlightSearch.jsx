@@ -54,6 +54,9 @@ export const SpotlightSearch = () => {
           <form
             className="tlwd-text-gray-200 tlwd-w-full tlwd-p-0 tlwd-m-0"
             onSubmit={submitHandler}
+            onMouseDown={(e) => {
+              e.stopPropagation();
+            }}
           >
             <div className="tlwd-flex tlwd-items-center tlwd-gap-2 tlwd-w-full">
               <div className=" tlwd-flex tlwd-items-center">
