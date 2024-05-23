@@ -4,7 +4,7 @@
   import { splitStream } from "../utils";
 
   let show = false;
-  let showConfig = false;
+  let showConfig = true;
 
   let url = "";
   let key = "";
