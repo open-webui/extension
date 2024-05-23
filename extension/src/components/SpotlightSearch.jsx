@@ -48,7 +48,10 @@ export const SpotlightSearch = () => {
     console.log(searchValue);
     setSearchValue("");
 
-    window.open(`http://localhost:8080/?q=${searchValue}`, "_blank");
+    window.open(
+      `http://localhost:8080/?q=${encodeURIComponent(searchValue)}`,
+      "_blank"
+    );
 
     setOpen(false);
   };
