@@ -4,11 +4,11 @@ export const SpotlightSearch = () => {
   const [open, setOpen] = useState(false);
   const [searchValue, setSearchValue] = useState("");
 
-  // Toggle the menu when ⌘K is pressed
+  // Toggle the menu when ⌘Space+Shift is pressed
   useEffect(() => {
     const down = (e) => {
       if (
-        e.key === "k" &&
+        e.key === " " &&
         (e.metaKey || e.ctrlKey) &&
         (e.shiftKey || e.altKey)
       ) {
@@ -40,7 +40,10 @@ export const SpotlightSearch = () => {
     <div className="fixed top-0 right-0 left-0 bottom-0 w-full min-h-screen h-screen flex justify-center z-[9999999999] overflow-hidden overscroll-contain">
       <div className=" m-auto max-w-xl w-full pb-32">
         <div className="w-full flex flex-col justify-between py-2.5 px-3.5 rounded-2xl outline outline-1 outline-gray-900 backdrop-blur-3xl bg-gray-850/70 shadow-4xl modal-animation">
-          <form className="text-gray-200 w-full" onSubmit={submitHandler}>
+          <form
+            className="text-gray-200 w-full p-0 m-0"
+            onSubmit={submitHandler}
+          >
             <div className="flex items-center gap-2 w-full">
               <div>
                 <svg
@@ -61,14 +64,15 @@ export const SpotlightSearch = () => {
               <input
                 id="open-webui-search-input"
                 placeholder="Search Open WebUI"
-                className="text-xl w-full font-medium bg-transparent placeholder:text-gray-500 text-neutral-100 outline-none"
+                className="text-xl w-full font-medium bg-transparent border-none placeholder:text-gray-500 text-neutral-100 outline-none"
                 value={searchValue}
                 onChange={(e) => setSearchValue(e.target.value)}
+                autoComplete="off"
               />
             </div>
 
             <p className="text-right text-[0.7rem] text-neutral-300">
-              Press <code>⌘K</code> to toggle
+              Press ⌘Space+Shift to toggle
             </p>
           </form>
         </div>
