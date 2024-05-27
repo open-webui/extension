@@ -31,6 +31,7 @@
     url = "";
     key = "";
     model = "";
+    models = [];
     showConfig = true;
   };
 
@@ -80,8 +81,16 @@
       key = _storageCache.key ?? "";
       model = _storageCache.model ?? "";
       if (_storageCache.url && _storageCache.key && _storageCache.model) {
-        models = await getModels(_storageCache.key, _storageCache.url);
-        showConfig = false;
+        models = await getModels(_storageCache.key, _storageCache.url).catch(
+          (error) => {
+            console.log(error);
+            resetConfig();
+          }
+        );
+
+        if (models) {
+          showConfig = false;
+        }
       }
     }
 
@@ -161,7 +170,11 @@
                   ],
                   stream: true,
                 },
-                models.find((m) => m.id === model)?.url
+
+                models.find((m) => m.id === model)?.owned_by === "openai" ??
+                  false
+                  ? `${url}/openai`
+                  : `${url}/ollama/v1`
               );
 
               if (res && res.ok) {

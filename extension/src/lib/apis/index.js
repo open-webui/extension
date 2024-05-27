@@ -1,12 +1,12 @@
-export const getOpenAIModels = async (token = "", url = "") => {
+export const getModels = async (key, url) => {
   let error = null;
 
-  const res = await fetch(`${url}/models`, {
+  const res = await fetch(`${url}/api/models`, {
     method: "GET",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
-      ...(token && { authorization: `Bearer ${token}` }),
+      ...(key && { authorization: `Bearer ${key}` }),
     },
   })
     .then(async (res) => {
@@ -14,48 +14,36 @@ export const getOpenAIModels = async (token = "", url = "") => {
       return res.json();
     })
     .catch((err) => {
-      error = `OpenAI: ${err?.error?.message ?? "Network Problem"}`;
-      return [];
+      console.log(err);
+      error = err;
+      return null;
     });
 
   if (error) {
     throw error;
   }
 
-  const models = Array.isArray(res) ? res : res?.data ?? null;
-
-  return models
-    ? models
-        .map((model) => ({
-          id: model.id,
-          name: model.name ?? model.id,
-          url: url,
-          custom_info: model.custom_info,
-        }))
-        .sort((a, b) => {
-          return a.name.localeCompare(b.name);
-        })
-    : models;
-};
-
-export const getModels = async (key, url) => {
-  let models = await Promise.all([
-    getOpenAIModels(key, `${url}/ollama/v1`).catch((error) => {
-      console.log(error);
-      return null;
-    }),
-    getOpenAIModels(key, `${url}/openai/api`).catch((error) => {
-      console.log(error);
-      return null;
-    }),
-  ]);
+  let models = res?.data ?? [];
 
   models = models
     .filter((models) => models)
-    .reduce((a, e, i, arr) => a.concat(e), []);
+    .sort((a, b) => {
+      // Compare case-insensitively
+      const lowerA = a.name.toLowerCase();
+      const lowerB = b.name.toLowerCase();
+
+      if (lowerA < lowerB) return -1;
+      if (lowerA > lowerB) return 1;
+
+      // If same case-insensitively, sort by original strings,
+      // lowercase will come before uppercase due to ASCII values
+      if (a < b) return -1;
+      if (a > b) return 1;
+
+      return 0; // They are equal
+    });
 
   console.log(models);
-
   return models;
 };
 
